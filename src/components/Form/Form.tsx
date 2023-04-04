@@ -6,13 +6,13 @@ import { StyledForm, Title, Subtitle, InputGroup, Total } from './styles';
 import { SingleValue } from 'react-select';
 import { Option } from '../../types/types';
 
-export const Form = () => {
-  const options: Option[] = [
-    { value: 1.1, label: '10%' },
-    { value: 1.15, label: '15%' },
-    { value: 1.2, label: '20%' },
-  ];
+const options: Option[] = [
+  { value: 1.1, label: '10%' },
+  { value: 1.15, label: '15%' },
+  { value: 1.2, label: '20%' },
+];
 
+export const Form = () => {
   const [billValue, setBillValue] = useState('');
   const [personsValue, setPersonsValue] = useState('');
   const [tipsValue, setTipsValue] = useState(options[0].value);
