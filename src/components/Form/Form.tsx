@@ -7,39 +7,39 @@ import { SingleValue } from 'react-select';
 import { Option } from '../../types/types';
 
 const options: Option[] = [
-  { value: 1.1, label: '10%' },
-  { value: 1.15, label: '15%' },
-  { value: 1.2, label: '20%' },
+  { value: 10, label: '10%' },
+  { value: 15, label: '15%' },
+  { value: 20, label: '20%' },
 ];
 
 export const Form = () => {
-  const [billValue, setBillValue] = useState('');
-  const [personsValue, setPersonsValue] = useState('');
-  const [tipsValue, setTipsValue] = useState(options[0].value);
-  const [total, setTotalValue] = useState<number | string>('0.00');
-  const [disabled, setDisabled] = useState(true);
+  const [bill, setBill] = useState('');
+  const [persons, setPersons] = useState('');
+  const [tips, setTips] = useState(options[0].value);
+  const [total, setTotal] = useState<number | string>('0.00');
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  const handleBillValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setBillValue(event.target.value);
+  const handleBill = (event: ChangeEvent<HTMLInputElement>) => {
+    setBill(event.target.value);
   };
 
-  const handlePersonValue = (event: ChangeEvent<HTMLInputElement>) => {
-    setPersonsValue(event.target.value);
+  const handlePerson = (event: ChangeEvent<HTMLInputElement>) => {
+    setPersons(event.target.value);
   };
 
   useEffect(() => {
-    setDisabled(billValue && personsValue ? false : true);
-  }, [billValue, personsValue]);
+    setIsDisabled(bill && persons ? false : true);
+  }, [bill, persons]);
 
-  const handleTipsValue = (event: SingleValue<Option>) => {
+  const handleTips = (event: SingleValue<Option>) => {
     if (event) {
-      setTipsValue(event.value);
+      setTips(event.value);
     }
   };
 
   const handleTotal = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTotalValue(+((+billValue * +personsValue) / tipsValue).toFixed(2));
+    setTotal(+((+bill + (+bill * tips) / 100) / +persons).toFixed(2));
   };
 
   return (
@@ -49,24 +49,24 @@ export const Form = () => {
       <InputGroup>
         <Input
           type="number"
-          value={billValue}
-          onChange={handleBillValue}
+          value={bill}
+          onChange={handleBill}
           placeholder="Enter bill"
         />
         <Input
           type="number"
-          value={personsValue}
-          onChange={handlePersonValue}
+          value={persons}
+          onChange={handlePerson}
           placeholder="Enter persons"
         />
         <CustomSelect
           options={options}
-          onChange={handleTipsValue}
+          onChange={handleTips}
           defaultValue={options[0]}
         />
       </InputGroup>
       <Total>Total: {total}$</Total>
-      <Button disabled={disabled} />
+      <Button disabled={isDisabled} />
     </StyledForm>
   );
 };
