@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/react-tips-calculator/static/js/main.6ae8a1f6.js",
+    "index.html": "/react-tips-calculator/index.html",
+    "static/media/decor.svg": "/react-tips-calculator/static/media/decor.5a97ecf9b5fd3c6d5262323f4381df18.svg",
+    "main.6ae8a1f6.js.map": "/react-tips-calculator/static/js/main.6ae8a1f6.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6ae8a1f6.js"
+  ]
+}
