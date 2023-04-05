@@ -5,19 +5,25 @@ import { Option } from "../../types/types";
 
 interface CustomSelectProps {
   options: Option[];
-  onChange: (option: SingleValue<Option>) => void;
+  setTips: (value: Option) => void;
   defaultValue: Option;
 }
 
 export const CustomSelect = ({
   options,
-  onChange,
+  setTips,
   defaultValue,
 }: CustomSelectProps) => {
+  const handleTips = (event: SingleValue<Option>) => {
+    if (event) {
+      setTips(event);
+    }
+  };
+
   return (
     <Select
       options={options}
-      onChange={onChange}
+      onChange={handleTips}
       defaultValue={defaultValue}
       styles={SelectStyles}
     />

@@ -3,7 +3,6 @@ import { CustomSelect } from "../CustomSelect/CustomSelect";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { StyledForm, Title, Subtitle, InputGroup, Total } from "./styles";
-import { SingleValue } from "react-select";
 import { Option } from "../../types/types";
 
 const options: Option[] = [
@@ -15,7 +14,7 @@ const options: Option[] = [
 export const Form = () => {
   const [bill, setBill] = useState("");
   const [persons, setPersons] = useState("");
-  const [tips, setTips] = useState(options[0].value);
+  const [tips, setTips] = useState<Option>(options[0]);
   const [total, setTotal] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -31,15 +30,9 @@ export const Form = () => {
     setIsDisabled(bill && persons ? false : true);
   }, [bill, persons]);
 
-  const handleTips = (event: SingleValue<Option>) => {
-    if (event) {
-      setTips(event.value);
-    }
-  };
-
   const handleTotal = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTotal((+bill + (+bill * tips) / 100) / +persons);
+    setTotal((+bill + (+bill * tips.value) / 100) / +persons);
   };
 
   return (
@@ -61,7 +54,7 @@ export const Form = () => {
         />
         <CustomSelect
           options={options}
-          onChange={handleTips}
+          setTips={setTips}
           defaultValue={options[0]}
         />
       </InputGroup>
